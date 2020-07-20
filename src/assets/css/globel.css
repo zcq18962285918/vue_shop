@@ -1,0 +1,19 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.el-breadcrumb {
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 10px;
+}
+
+.el-pagination {
+    margin-top: 15px;
+}
+
+.el-table {
+    margin-top: 15px;
+}
