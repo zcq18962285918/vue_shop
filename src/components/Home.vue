@@ -69,8 +69,8 @@
       },
 
       async list_menu() {
-        const listMenu = await this.$http.get('menu/listMenu')
-        this.menu = listMenu.data
+        const listMenu = await this.$http.Get('menu/listMenu')
+        this.menu = listMenu
         //console.log(this.menu)
       },
 

@@ -120,10 +120,10 @@
        this.$refs.userFrom.validate(async (valid) => {
           if (valid) {
             if (this.id !== '') {
-              await this.$http.post('user/modify', this.user)
+              await this.$http.Post('user/modify', this.user)
               this.$message.success('修改成功')
             } else {
-              await this.$http.post('user/add', this.user)
+              await this.$http.Post('user/add', this.user)
               this.$message.success('添加成功')
             }
             // 调用父元素的方法（方法名，data[]）
@@ -136,15 +136,15 @@
       },
 
       async getUser() {
-        const user = await this.$http.get(`/user/get/${this.id}`)
+        const user = await this.$http.Get(`/user/get/${this.id}`)
         //console.log(user)
-        this.user = user.data
+        this.user = user
       },
 
       async getDepartment() {
-        const depar = await this.$http.get('department/list')
+        const depar = await this.$http.Get('department/list')
         //console.log(depar)
-        this.depar = depar.data
+        this.depar = depar
       }
     }
   }

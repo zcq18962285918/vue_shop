@@ -52,23 +52,24 @@
             return;
           }
           // 发送请求 await
-          const post = await this.$http.post('user/checkUser', this.dynamicValidateForm);
+          const post = await this.$http.Post('user/checkUser', this.dynamicValidateForm);
           //console.log(post);
-          if (post.status !== 200) {
-            this.$message.error('登录失败');
+          // if (post.status !== 200) {
+          //   this.$message.error('登录失败');
+          // } else {
+          //
+          // }
+          if (post !== "") {
+            this.$message({
+              message: '登录成功',
+              type: 'success'
+            });
+            window.sessionStorage.setItem("username", post.username);
+            this.$router.push('/home')
           } else {
-            if (post.data !== "") {
-              this.$message({
-                message: '登录成功',
-                type: 'success'
-              });
-              window.sessionStorage.setItem("username", post.data.username);
-              this.$router.push('/home')
-            } else {
-              this.$message.error(
-                '用户名或密码错误，请重新登录！'
-              )
-            }
+            this.$message.error(
+              '用户名或密码错误，请重新登录！'
+            )
           }
         })
       },

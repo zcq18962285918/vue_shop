@@ -7,9 +7,16 @@
     </el-breadcrumb>
 
     <el-card>
+
+      <el-button @click="addGoods()">
+        添加商品
+      </el-button>
       <el-table
         :data="product"
+        stripe
+        border
         style="width: 100%">
+        <el-table-column type="selection" label="#" ></el-table-column>
         <el-table-column
           prop="name"
           label="商品名称"
@@ -61,8 +68,12 @@
 
     methods: {
       async listProducts() {
-        const product = await this.$http.get('product/list')
-        this.product = product.data
+        const product = await this.$http.Get('product/list')
+        this.product = product
+      },
+
+      addGoods() {
+        this.$router.push({name: 'addGoods', params: {id: 1}})
       }
     }
   }

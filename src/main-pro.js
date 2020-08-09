@@ -1,20 +1,14 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/globel.css'
-import axios from 'axios'
-import ZkTable from 'vue-table-with-tree-grid'
-import VueQuillEditor from 'vue-quill-editor'
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
-import nprogress from 'nprogress'
-import 'nprogress/nprogress.css'
+// import axios from 'axios'
+// import ZkTable from 'vue-table-with-tree-grid'
+// import VueQuillEditor from 'vue-quill-editor'
 
-Vue.use(VueQuillEditor)
-Vue.component('treeTable', ZkTable)
+// import nprogress from 'nprogress'
+// 1. 导入echatrs
+// import echatrs from 'echarts'
 
 Vue.filter('dateFormat', function() {
   const date = new Date()
@@ -36,12 +30,12 @@ axios.defaults.baseURL = 'http://localhost:8080/'
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('username')
   // 这里使用了nprogress(头上那个绿色的进度条)，请求时打开
-  nprogress.start()
+  NProgress.start()
   return config
 })
 axios.interceptors.response.use(value => {
   // 这里使用了nprogress，响应时关闭
-  nprogress.done()
+  NProgress.done()
   return value
 })
 
@@ -49,7 +43,6 @@ Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 
-Vue.use(ElementUI)
 
 new Vue({
   router,

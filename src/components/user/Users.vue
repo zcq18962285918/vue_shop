@@ -8,7 +8,8 @@
 
     <el-card class="box-card">
       <div style="margin-top: 15px;">
-        <el-input placeholder="请输入用户名" style="width: 30%" v-model="pageInfo.username" class="input-with-select" clearable @clear="getUsers(1)">
+        <el-input placeholder="请输入用户名" style="width: 30%" v-model="pageInfo.username" class="input-with-select"
+                  clearable @clear="getUsers(1)">
           <el-button slot="append" icon="el-icon-search" @click="getUsers(1)"></el-button>
         </el-input>
         <el-button type="primary" @click="addDialogForm">添加用户</el-button>
@@ -40,6 +41,8 @@
           prop="valid"
           label="有效">
           <template slot-scope="scope">
+            <!-- 这里使用了dateFormat全局时间格式化过滤函数 -->
+            {{154646546465 | dateFormat}}
             <el-switch
               v-model="scope.row.valid"
               active-color="#13ce66"
@@ -56,7 +59,7 @@
           label="操作">
           <template slot-scope="scope">
             <el-button type="primary" @click="updateUser(scope.row)" icon="el-icon-edit" size="mini"></el-button>
-            <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
+            <el-button type="danger" icon="el-icon-delete" size="mini" @click="del()"></el-button>
             <el-tooltip class="item" effect="dark" content="权限分配" placement="top">
               <el-button type="warning" icon="el-icon-s-tools" size="mini" :enterable="true"></el-button>
             </el-tooltip>
@@ -101,7 +104,7 @@
           total: 0
         },
         id: '',
-        title: "添加用户"
+        title: '添加用户'
       }
     },
 
@@ -114,16 +117,26 @@
       AddUser
     },
 
+    // render函数
+    // render: function (createElement) {
+    //   return createElement('h1', '142424')
+    // },
+
     methods: {
       async getUsers(page) {
         //
         if (typeof page !== 'undefined') {
           this.pageInfo.page = page
         }
-        const userList = await this.$http.get('user/list', { params: this.pageInfo })
-        //console.log(userList.data)
-        this.users = userList.data.list
-        this.pageInfo.total = userList.data.total
+        try {
+          const userList = await this.$http.Get('user/list', { params: this.pageInfo })
+          this.users = userList.list
+          this.pageInfo.total = userList.total
+        } catch (e) {
+          this.$message('用户查询失败')
+        }
+
+
       },
 
       changeSize(size) {
@@ -153,7 +166,25 @@
 
       changeVaild(userinfo) {
         //console.log(userinfo)
-        this.$http.post("/user/modify", userinfo)
+        this.$http.post('/user/modify', userinfo)
+      },
+
+      del() {
+        this.$confirm('是否确认删除？', '确认删除', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '已删除'
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消删除'
+          })
+        })
       }
     }
   }

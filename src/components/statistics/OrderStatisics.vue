@@ -1,5 +1,7 @@
 <template>
-    $END$
+  <div>
+    <h1>订单统计列表</h1>
+  </div>
 </template>
 
 <script>
