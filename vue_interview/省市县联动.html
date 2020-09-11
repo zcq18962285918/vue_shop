@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/vue/2.6.11/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.19.2/axios.min.js"></script>
+</head>
+<body>
+<div id="abc">
+    <select>
+        <option></option>
+        <option></option>
+        <option></option>
+    </select>
+    <select>
+        <option></option>
+        <option></option>
+        <option></option>
+    </select>
+    <select>
+        <option></option>
+        <option></option>
+        <option></option>
+    </select>
+</div>
+<div></div>
+<div></div>
+
+<script>
+
+  window.onload = function() {
+    new Vue({
+      el: '#abc',
+      date: {
+        all: []
+      },
+      mounted() {
+        this.getList()
+        console.log(this.all)
+      },
+      methods: {
+        async getList() {
+          await axios.get('http://localhost:8080/province/list').then(res => {
+            this.all = res.data
+            console.log(this.all)
+          }).catch(function(error) {
+            console.log(error)
+          })
+        },
+
+        getProvince() {
+
+        }
+      }
+    })
+  }
+</script>
+</body>
+</html>

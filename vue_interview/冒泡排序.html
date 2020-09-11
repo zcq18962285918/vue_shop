@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  var arr = [5, 21, 1, 12, 78, 2, 4, 1, 12, 11, 21]
+
+  function maopao(arr) {
+
+    var b
+
+    // for (let i = 0; i < arr.length; i++) {
+    //   for (let j = i; j < arr.length; j++) {
+    //     if (arr[i] > arr[j]) {
+    //       b = arr[j]
+    //       arr[j] = arr[i]
+    //       arr[i] = b
+    //     }
+    //   }
+    // }
+
+    for (let i = 0; i < arr.length - 1; i++) {
+      for (let j = 0; j < arr.length - 1 - i; j++) {
+        if (arr[j] > arr[j + 1]) {
+          b = arr[j]
+          arr[j] = arr[j + 1]
+          arr[j + 1] = b
+        }
+      }
+
+    }
+
+    console.log(arr)
+  }
+
+  console.log(new Set(arr))
+
+  maopao(arr)
+</script>
+
+</body>
+</html>
